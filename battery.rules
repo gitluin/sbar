@@ -1,0 +1,2 @@
+ACTION=="change", ENV{SUBSYSTEM}=="power_supply", ENV{POWER_SUPPLY_NAME}=="BAT0", ENV{POWER_SUPPLY_STATUS}=="Discharging", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/ishmael/.Xauthority", RUN+="/bin/sbar_battery.sh"
+ACTION=="change", ENV{SUBSYSTEM}=="power_supply", ENV{POWER_SUPPLY_NAME}=="BAT0", ENV{POWER_SUPPLY_STATUS}=="Charging", ENV{DISPLAY}=":0", ENV{XAUTHORITY}="/home/ishmael/.Xauthority", RUN+="/bin/sbar_battery.sh"
