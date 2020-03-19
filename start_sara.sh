@@ -11,7 +11,7 @@ BARFG="#ffffff"
 BARBG="#000000"
 BARFONT="Noto Sans:size=10"
 
-XSETRFILE="~/.sbar/.name"
+XSETRFILE="home/ishmael/.sbar/.name"
 INFF="/tmp/saralemon.fifo"
 [[ -p $INFF ]] || mkfifo -m 600 "$INFF"
 
