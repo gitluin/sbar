@@ -62,7 +62,7 @@ while read line; do
 	fi
 done < "$INFF" | lemonbar -g "$BARW"x18+0+0 -d -f "$BARFONT" -p -B "$BARBG" -F "$BARFG" &
 
-# pull information from saranobar
+# pull information from sara
 sara > "$INFF"
 
 IFS=$OIFS
