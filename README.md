@@ -1,6 +1,6 @@
 sbar
 -----
-This is a collection of shell scripts that `xsetroot -name` with various information that I want in my status bar. It was originally written for use with [sara v1.0-v2.0](https://github.com/gitluin/sara), but will work with dwm or any other program that reads the X root window name.
+This is a collection of shell scripts that `xsetroot -name` with various information that I want in my status bar. It was originally written for use with [sara v1.0-v2.0](https://github.com/gitluin/sara), but will work with dwm or any other program that reads the X root window name. By default, this set of scripts writes volume info (`alsa`), brightness info (`light`), network ssid, and battery info.
 
 To start, create `~/.sbar/`. Then, symlink the files from this repository to `/usr/local/bin/` with the prefix `sbar_` added to all but `startsbar.sh`. Then add `startsbar.sh &` to `~/.xinitrc` **before** the `exec sara` line. Make sure you change any directory names, etc. to match your system.
 
