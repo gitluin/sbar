@@ -1,44 +1,20 @@
-#!/bin/sh
+#!/bin/bash
 
-name_file="/home/ishmael/.sbar/.name"
-tmp_file="/home/ishmael/.sbar/.tmpname"
-sbarname="$(cat $name_file)"
-batcapfile="/sys/class/power_supply/BAT0/capacity"
-batstatfile="/sys/class/power_supply/BAT0/status"
-batsymfile="/home/ishmael/.sbar/.batsym"
+BATSTATFILE="/sys/class/power_supply/BAT0/status"
+BATCAPFILE="/sys/class/power_supply/BAT0/capacity"
 
-# -------------------------------
-# Set battery, get ready to update
-
+# Let udev breathe
 sleep 1
 
-batstat=$(cat $batstatfile) 
-bat=$(cat $batcapfile)
-if [ "$batstat" = "Charging" ]; then
-	batsym="CHR:"
-elif [ "$batstat" = "Unknown" ]; then
-	batsym="CHR:"
-else 
-	batsym="BAT:"
-fi
-echo "$batsym" > "$batsymfile"
+BATSTAT="$(cat $BATSTATFILE)"
+BAT="$(cat $BATCAPFILE)"
 
-# -------------------------------
-# Update sbar
+test $BAT -gt 100 && BAT=100
 
-# Get current xsetroot name
-# LOCK OR SOMETHING HERE
-exec 9>/tmp/sbarlock
-if ! flock -w 5 9 ; then
-	echo "Could not get the lock :("
-	exit 1
-fi
+BATSYM="BAT:"
+test "$BATSTAT" = "Charging" || test "$BATSTAT" = "Unknown" && BATSYM="CHR:"
+test "$BATSTAT" = "Full" && BATSYM="CHR:"
 
-#"VOL: $vol | $brightsym $bright% | $netname | $batsym $bat% | $bardate $bartime"
-sed "s/\S\+/$batsym/9" "$name_file" > "$tmp_file"
-sed "s/\S\+/$bat%/10" "$tmp_file" > "$name_file"
-
-xsetroot -name "$(cat "$name_file")"
-# RELEASE LOCK
-9>&-
-rm -rf /tmp/sbarlock
+#"VOL: $VOL | o $BRIGHT% | $NETNAME | $BATSYM $BAT%"
+# Sudo is necessary when this is run from udev
+sudo /usr/local/bin/sbar_update.sh "$BATSYM" 9 "$BAT%" 10
