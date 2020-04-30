@@ -1,11 +1,10 @@
-#!/bin/bash
+#!/bin/sh
 
 test "$(pgrep -c "sbar_loop.sh")" -ge 1 && exit 1
 
 NAMEFILE="/home/ishmael/.sbar/.name"
 
 # Clear out any stale locks
-9>&-
 sudo rm -rf /tmp/sbarlock
 
 echo "VOL: NA | o NA% | NA | NA NA%" > "$NAMEFILE"

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 #"VOL: $VOL | o $BRIGHT% | $NETNAME | $BATSYM $BAT%"
 while true; do
